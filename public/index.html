@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form id="form-images" action="/photos/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="photos" id="gallery-photo-add" multiple/>
+        <input type="submit" value="Lưu">
+    </form>
+    <div class="gallery"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $("#form-images").submit(function(event) {
+            event.preventDefault();
+            var formData = new FormData($(this)[0]);
+
+            formData.append('photos[]', $("#gallery-photo-add")[0].files);
+            console.log($("#gallery-photo-add")[0].files);
+
+            $.ajax({
+                type: 'POST',
+                url: '/photos/upload',
+                data: formData,
+                async: false,
+                cache: false,
+                contentType: false,
+                enctype: 'multipart/form-data',
+                processData: false,
+                success: function(data) {
+                    console.log(data);
+                }
+            })
+        })
+
+        $(function() {
+            // Multiple images preview in browser
+            var imagesPreview = function(input, placeToInsertImagePreview) {
+                if (input.files) {
+                    var filesAmount = input.files.length;
+
+                    for (i = 0; i < filesAmount; i++) {
+                        var reader = new FileReader();
+
+                        reader.onload = function(event) {
+                            $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+                        }
+
+                        reader.readAsDataURL(input.files[i]);
+                    }
+                }
+
+            };
+
+            $('#gallery-photo-add').on('change', function() {
+                $('div.gallery').html('');
+                imagesPreview(this, 'div.gallery');
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+{
+    "name": "thuvien",
+    "version": "1.0.0",
+    "description": "slider: react-slick\r moment: moment(moment().subtract(1, \"days\")).format(\"DD/MM/YYYY - HH:mm\"),\r https://drive.google.com/uc?id=",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js",
+        "dev": "nodemon index.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/galalang113/thuvien.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/galalang113/thuvien/issues"
+    },
+    "homepage": "https://github.com/galalang113/thuvien#readme",
+    "dependencies": {
+        "express": "^4.17.1",
+        "multer": "^1.4.2"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.7"
+    }
+}
